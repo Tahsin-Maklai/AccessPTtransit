@@ -1,12 +1,50 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>PtTransit-Home</title>
+
+  <!-- RESET first (you already have one) -->
+  <!-- <link rel="stylesheet" href="styles/reset.css"> -->
+  <!-- Main styles -->
+  <link rel="stylesheet" href="styles/main.css">
 </head>
 <body>
-    <h1> AccessPTtransit</h1>
-    
+  <!-- Skip link for screen readers / keyboard users -->
+  <a class="skip-link" href="#main">Skip to main content</a>
+
+  <header class="site-header" role="banner">
+    <div class="container">
+      <h1 class="app-title">Welcome to <span class="brand">PtTransit</span> App</h1>
+    </div>
+  </header>
+
+  <main id="main" class="container" role="main" tabindex="-1" aria-describedby="page-intro">
+  <p id="page-intro" class="lead">
+    What do you want to look for today?
+  </p>
+
+  <nav aria-label="Primary options" class="home-nav">
+    <a class="cta" href="trip-planner.html" aria-label="Go to Trip Planner (plan a trip between stops)">
+      Trip Planner
+    </a>
+    <a class="cta" href="routes.html" aria-label="Go to Bus Routes (see next buses and routes)">
+      Bus Routes
+    </a>
+  </nav>
+</main>
+
+<!-- Full-width hero image under the buttons (decorative) -->
+<section class="hero-bleed" aria-hidden="true"></section>
+
+
+<footer class="site-footer" role="contentinfo">
+  <div class="container">
+    <!-- intentionally blank (removed the old text) -->
+  </div>
+</footer>
+
+
 </body>
 </html>

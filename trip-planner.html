@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>PtTransit Trip Planner</title>
+
+  <link rel="stylesheet" href="styles/main.css">
+  <script src="scripts/trip-planner.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to main content</a>
+
+  <header class="site-header" role="banner">
+    <div class="container">
+      <h1 class="app-title"><span class="brand">PtTransit</span> Trip Planner</h1>
+    </div>
+  </header>
+
+  <main id="main" class="container" role="main" tabindex="-1">
+    <p class="lead">Plan your journey between stops.</p>
+
+    <!-- Trip Planner Form -->
+    <form id="plannerForm" class="planner-form" aria-describedby="helper">
+      <fieldset>
+        <legend class="sr-only">Trip details</legend>
+
+        <div class="form-grid">
+          <div class="form-field">
+            <label for="fromStop">From</label>
+            <input id="fromStop" name="fromStop" list="stops" placeholder="Start stop (e.g., Downtown Terminal)" required aria-required="true" autocomplete="off">
+          </div>
+
+          <div class="form-field">
+            <label for="toStop">To</label>
+            <input id="toStop" name="toStop" list="stops" placeholder="Destination (e.g., Trent University)" required aria-required="true" autocomplete="off">
+          </div>
+        </div>
+
+        <p id="helper" class="form-help">
+          Start typing to pick a stop. Press <kbd>Tab</kbd> to move between fields, then select <em>Search Routes</em>.
+        </p>
+
+        <button type="submit" class="cta" aria-label="Search for available routes">Search Routes</button>
+        <a href="index.html" class="cta ghost" aria-label="Back to home">← Back to Home</a>
+      </fieldset>
+    </form>
+
+    <!-- Autocomplete list -->
+    <datalist id="stops"></datalist>
+
+    <!-- Results -->
+    <section id="results" class="results" aria-live="polite" aria-atomic="true"></section>
+  </main>
+</body>
+</html>
