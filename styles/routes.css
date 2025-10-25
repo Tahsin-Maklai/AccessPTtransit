@@ -55,3 +55,57 @@ input[type="checkbox"] {
   cursor: pointer;
 }
 
+/* ====== Route status (appears under checkbox) ====== */
+.route-status {
+  font-size: 1em;
+  color: #003366;
+  background-color: #dbe9ff;
+  border-left: 0.4em solid #004080;
+  border-radius: 0.4em;
+  padding: 0.4em 0.8em;
+  margin: 0.4em 0 0.8em 2.2em;
+}
+
+/* ====== TTS controls (Play, Stop, and Status) ====== */
+#ttsPlay, #ttsStop {
+  font-size: 1.2em;
+  font-weight: 600;
+  padding: 0.6em 1.4em;
+  border: none;
+  border-radius: 0.5em;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.25s ease, transform 0.1s ease;
+}
+
+#ttsPlay {
+  background-color: #2e7d32; /* green */
+}
+
+#ttsPlay:hover {
+  background-color: #1b5e20;
+}
+
+#ttsStop {
+  background-color: #c62828; /* red */
+  margin-left: 0.8em;
+}
+
+#ttsStop:hover {
+  background-color: #8e0000;
+}
+
+/* ====== Status text beside buttons ====== */
+#tts-status {
+  display: inline-block;
+  margin-left: 1em;
+  font-size: 1.1em;
+  color: #003366;
+  font-weight: bold;
+  vertical-align: middle;
+}
+
+/* Center the control bar */
+#ttsPlay, #ttsStop, #tts-status {
+  margin-top: 1em;
+}
