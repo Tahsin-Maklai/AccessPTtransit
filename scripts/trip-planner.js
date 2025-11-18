@@ -241,3 +241,91 @@ function setupForm() {
 /* init */
 injectStops();
 setupForm();
+
+(() => {
+  if (!("speechSynthesis" in window)) {
+    const s = document.getElementById("tts-status");
+    if (s) s.textContent = "Text-to-speech not supported in this browser.";
+    return;
+  }
+
+  const btnPlay   = document.getElementById("ttsPlay");
+  const btnStop   = document.getElementById("ttsStop");
+  const statusEl  = document.getElementById("tts-status");
+  const resultsEl = document.getElementById("results");
+
+  function setStatus(msg) {
+    if (statusEl) statusEl.textContent = msg;
+    console.log("[TTS]", msg);
+  }
+
+  function getDirectionsText() {
+    if (!resultsEl) return "";
+    const text = resultsEl.innerText || resultsEl.textContent || "";
+    return text.trim();
+  }
+
+  // Chunk long text so some platforms don’t cut off mid-sentence
+  function chunkText(text, size = 180) {
+    const out = [];
+    let i = 0;
+    while (i < text.length) {
+      let end = Math.min(i + size, text.length);
+      const p = text.lastIndexOf(".", end);
+      if (p > i + 40) end = p + 1;
+      out.push(text.slice(i, end).trim());
+      i = end;
+    }
+    return out.filter(Boolean);
+  }
+
+  function speakDirections() {
+    const text = getDirectionsText();
+    if (!text) {
+      setStatus("No directions to read yet. Plan a trip first.");
+      return;
+    }
+
+    // Cancel any existing speech
+    speechSynthesis.cancel();
+
+    const chunks = chunkText(text);
+
+    function speakNext() {
+      if (!chunks.length) {
+        setStatus("Finished.");
+        return;
+      }
+      const u = new SpeechSynthesisUtterance(chunks.shift());
+      u.onstart = () => setStatus("Speaking…");
+      u.onend   = speakNext;
+      u.onerror = () => {
+        setStatus("Error speaking; continuing…");
+        speakNext();
+      };
+      speechSynthesis.speak(u);
+    }
+
+    speakNext();
+  }
+
+  btnPlay?.addEventListener("click", speakDirections);
+  btnStop?.addEventListener("click", () => {
+    speechSynthesis.cancel();
+    setStatus("Stopped.");
+  });
+
+  // Optional shortcuts: Enter = Play, Esc = Stop (when not typing in inputs)
+  document.addEventListener("keydown", (e) => {
+    if (e.target && /input|textarea|select/i.test(e.target.tagName)) return;
+    if (e.key === "Enter") {
+      e.preventDefault();
+      speakDirections();
+    }
+    if (e.key === "Escape") {
+      e.preventDefault();
+      speechSynthesis.cancel();
+      setStatus("Stopped.");
+    }
+  });
+})();

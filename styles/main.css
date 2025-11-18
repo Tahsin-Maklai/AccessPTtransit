@@ -269,5 +269,71 @@ main.container { margin-bottom: 0; }
 .steps li {
   margin: 0.25rem 0;
 }
+/* TTS status + buttons */
+#tts-status {
+  margin-top: 0.5rem;
+  font-size: 0.9rem;
+  color: var(--muted);
+  min-height: 1.2em;        /* reserve space so layout doesn’t jump */
+}
+
+/* Wrap the status + buttons in a flex row if you want:
+   <div class="tts-controls">
+     <div id="tts-status"...></div>
+     <button id="ttsPlay">...</button>
+     <button id="ttsStop">...</button>
+   </div>
+*/
+.tts-controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  align-items: center;
+  margin-top: 0.75rem;
+}
+
+/* Base style shared by both buttons */
+#ttsPlay,
+#ttsStop {
+  font: inherit;
+  border-radius: 999px;
+  padding: 0.45rem 0.9rem;
+  border: 2px solid transparent;
+  cursor: pointer;
+  line-height: 1.2;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  background: #1b1b21;
+  color: var(--text);
+}
+
+/* Play = primary/brand */
+#ttsPlay {
+  background: var(--brand);
+  color: #00202A;
+  font-weight: 700;
+}
+
+/* Stop = “danger” style */
+#ttsStop {
+  background: #ff4d4f;
+  color: #1a0000;
+  font-weight: 700;
+}
+
+/* Hover states */
+#ttsPlay:hover,
+#ttsStop:hover {
+  filter: brightness(0.95);
+}
+
+/* Focus states (keyboard users) */
+#ttsPlay:focus-visible,
+#ttsStop:focus-visible {
+  outline: none;
+  border-color: var(--focus);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--focus) 50%, transparent);
+}
 
 
